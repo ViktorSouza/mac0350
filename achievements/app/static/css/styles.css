@@ -1,0 +1,95 @@
+:root {
+	--background-primary-color: rgb(2, 6, 23);
+	--background-secondary-color: rgb(5, 11, 37);
+	--heading-color: rgb(96 165 250);
+	--text-color: rgb(203 213 225);
+}
+
+button,
+input[type='submit'],
+input[type='reset'] {
+	background: none;
+	color: inherit;
+	border: none;
+	border-radius: 5px;
+	padding: 5px 10px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+	background: var(--background-primary-color);
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	color: var(--text-color);
+	font-size: 12pt;
+	display: flex;
+	flex-direction: column;
+}
+h1,
+h2,
+h3 {
+	color: var(--heading-color);
+}
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+main {
+	flex: 1;
+	max-width: 80vw;
+	align-self: center;
+}
+
+nav {
+	display: flex;
+	padding: 10px;
+	border-bottom: solid #373737;
+	border-width: 1px;
+
+	#nav-content {
+		column-gap: 33px;
+		display: flex;
+		width: 80vw;
+		display: flex;
+		margin: auto;
+	}
+	a {
+		font-size: 16pt;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+}
+footer {
+	position: static;
+	display: flex;
+	justify-content: center;
+
+	#footer-content {
+		width: 80vw;
+		display: flex;
+		margin: auto;
+	}
+}
+
+#nina-nome {
+	font-size: 52pt;
+	text-align: center;
+	margin: 3px;
+}
+
+.achievement-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 10px;
+	list-style-type: none;
+}
+.achievement {
+	background: var(--background-secondary-color);
+	padding: 10px;
+	border-radius: 5px;
+}

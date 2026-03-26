@@ -1,0 +1,56 @@
+body {
+	background: #e5e7e9;
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	color: #373737;
+	font-size: 12pt;
+	display: flex;
+	flex-direction: column;
+}
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+main {
+	flex: 1;
+	max-width: 80vw;
+	align-self: center;
+}
+
+nav {
+	display: flex;
+	padding: 10px;
+	border-bottom: solid #373737;
+	border-width: 1px;
+
+	#nav-content {
+		column-gap: 33px;
+		display: flex;
+		width: 80vw;
+		display: flex;
+		margin: auto;
+	}
+	a {
+		font-size: 16pt;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+}
+footer {
+	position: static;
+	display: flex;
+	justify-content: center;
+
+	#footer-content {
+		width: 80vw;
+		display: flex;
+		margin: auto;
+	}
+}
+
+#nina-nome {
+	font-size: 52pt;
+	text-align: center;
+	margin: 3px;
+}
