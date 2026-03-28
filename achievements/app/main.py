@@ -84,8 +84,15 @@ async def home(request: Request):
                 context={"achievements": ACHIEVEMENTS}
     )
 
+@app.get("/login", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse(
+        request=request, 
+        name="login.html",
+    )
 
 # =========================
+
 # Feed (Timeline)
 # =========================
 

@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<form
+	hx-post="/login"
+	hx-target="#achievement-list"
+	hx-swap="beforeend">
+	<div class="form">
+		<h1>Bem-vindo novamente!</h1>
+		<input
+			type="text"
+			name="Nome"
+			placeholder="Leno Brega"
+			required />
+		<input
+			type="password"
+			name="senha"
+			placeholder="*********"
+			required />
+		<span>Esqueci minha senha.</span>
+
+		<div style="display: flex; gap: 5px">
+			<button
+				type="button"
+				class="secondary-button"
+				style="flex: 1">
+				Criar conta
+			</button>
+			<button
+				class="primary-button"
+				type="submit"
+				style="flex: 1">
+				Entrar
+			</button>
+		</div>
+	</div>
+</form>
+{% endblock %}
