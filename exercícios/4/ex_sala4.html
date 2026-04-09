@@ -1,0 +1,107 @@
+# main.py from fastapi import FastAPI, Request from fastapi.responses import
+HTMLResponse from pydantic import BaseModel app = FastAPI() # "Banco de dados"
+em memória usuarios = [] # Modelo de dados class Usuario(BaseModel): nome: str
+idade: int # --- 1. GET "/" -> retorna HTML --- @app.get("/",
+response_class=HTMLResponse) async def home(): return """
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+		<script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
+		<title>Requests</title>
+		<style>
+			body {
+				display: flex;
+				gap: 2.5vw;
+				justify-content: center;
+				min-height: 90vh;
+				background-color: #292827;
+				color: #e0e0e0;
+			}
+			.secao-interacao,
+			.secao-respostas {
+				border: 2px solid #ff690a;
+				border-radius: 15px;
+				padding: 20px;
+				width: 50%;
+			}
+			.secao-interacao,
+			form {
+				display: flex;
+				flex-direction: column;
+			}
+			#json-insert {
+				color: #ff690a;
+				font-size: xx-large;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="secao-interacao">
+			<h1>Requests</h1>
+			<form
+				hx-post="/users"
+				hx-trigger="submit"
+				hx-target="#json-insert"
+				hx-swap="innerHTML"
+				hx-ext="json-enc">
+				<label>Nome</label>
+				<input
+					type="text"
+					name="nome" />
+				<label>Idade</label>
+				<input
+					type="number"
+					name="idade" />
+				<input type="submit" />
+			</form>
+
+			<hr />
+
+			<input
+				type="number"
+				name="index"
+				hx-get="/users"
+				hx-trigger="input changed"
+				hx-target="#json-insert"
+				hx-swap="innerHTML"
+				placeholder="Índice" />
+
+			<hr />
+
+			<button
+				hx-get="/users"
+				hx-target="#json-insert"
+				hx-swap="innerHTML">
+				Obter todos
+			</button>
+
+			<hr />
+
+			<button
+				hx-delete="/users"
+				hx-target="#json-insert"
+				hx-swap="innerHTML">
+				Limpar lista
+			</button>
+		</div>
+
+		<div class="secao-respostas">
+			<h1>Respostas</h1>
+			<div id="json-insert"></div>
+		</div>
+	</body>
+</html>
+""" # --- 2. POST /users -> adicionar usuário --- @app.post("/users") async def
+adicionar_usuario(request: Request): form = await request.form() nome =
+form.get("nome") idade = form.get("idade") usuario = {"nome": nome, "idade":
+int(idade)} usuarios.append(usuario) return usuario # --- 3. GET /users ->
+listar ou pegar por índice --- @app.get("/users") async def
+listar_usuarios(index: int | None = None): if index is not None: if 0 <= index <
+len(usuarios): return usuarios[index] return {"erro": "Índice inválido"} return
+usuarios # --- 4. DELETE /users -> limpar lista --- @app.delete("/users") async
+def deletar_usuarios(): usuarios.clear() return {"mensagem": "Lista limpa"}

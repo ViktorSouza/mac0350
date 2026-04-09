@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+			rel="stylesheet" />
+		<style>
+			:root {
+				--background-color: #292827;
+				--surface-color: #363636;
+				--primary-text-color: #e0e0e0;
+				--accent-color-1: #ff690a;
+				--border-color: #444;
+				--code-bg: #404040;
+			}
+			body {
+				font-family: 'Roboto', sans-serif;
+				background-color: var(--background-color);
+				color: var(--primary-text-color);
+				padding: 2rem;
+				max-width: 800px;
+				margin: 0 auto;
+				line-height: 1.6;
+			}
+			h1,
+			h3 {
+				color: var(--accent-color-1);
+			}
+			h1 {
+				border-bottom: 2px solid var(--border-color);
+				padding-bottom: 10px;
+			}
+			.challenge {
+				background-color: var(--surface-color);
+				border: 1px solid var(--border-color);
+				padding: 20px;
+				border-radius: 8px;
+				margin-bottom: 20px;
+			}
+			code {
+				background-color: var(--code-bg);
+				padding: 2px 5px;
+				border-radius: 4px;
+				color: var(--accent-color-1);
+				font-family: monospace;
+			}
+			ul {
+				padding-left: 20px;
+			}
+		</style>
+		<title>Para Casa - JS Parte 1</title>
+	</head>
+	<body>
+		<h1>Desafios para Casa: JavaScript Básico</h1>
+
+		<!-- Desafio 1 -->
+		<div>
+			<h3>Desafio 1: Interruptor</h3>
+			<button onclick="alternarLuz()">Alternar Luz</button>
+			<p id="texto-luz">A luz está APAGADA</p>
+		</div>
+
+		<!-- Desafio 2 -->
+		<div>
+			<h3>Desafio 2: Multiplicador</h3>
+			<h1 id="visor-valor">2</h1>
+			<button onclick="dobrarValor()">Dobrar</button>
+		</div>
+
+		<script>
+			// Desafio 1
+			function alternarLuz() {
+				const texto = document.querySelector('#texto-luz')
+
+				if (texto.innerHTML === 'A luz está APAGADA') {
+					texto.innerHTML = 'A luz está ACESA'
+				} else {
+					texto.innerHTML = 'A luz está APAGADA'
+				}
+			}
+
+			// Desafio 2
+			let valor = 2
+
+			function dobrarValor() {
+				valor = valor * 2
+				document.querySelector('#visor-valor').innerHTML = valor
+
+				if (valor > 100) {
+					alert(`Cuidado, o número ${valor} está ficando muito grande!`)
+				}
+			}
+		</script>
+	</body>
+</html>

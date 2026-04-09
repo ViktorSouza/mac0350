@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Login</title>
+	</head>
+	<body>
+		<h1>Login</h1>
+
+		<input
+			id="nome"
+			placeholder="Nome" />
+		<input
+			id="senha"
+			placeholder="Senha" />
+
+		<button onclick="logar()">Entrar</button>
+
+		<script>
+			async function logar() {
+				const params = new URLSearchParams()
+				params.append('nome', document.getElementById('nome').value)
+				params.append('senha', document.getElementById('senha').value)
+
+				const res = await fetch('/login', {
+					method: 'POST',
+					body: params,
+				})
+
+				if (res.ok) {
+					window.location.href = '/home'
+				} else {
+					alert('Erro no login')
+				}
+			}
+		</script>
+	</body>
+</html>

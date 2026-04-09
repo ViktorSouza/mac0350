@@ -1,0 +1,17 @@
+<div
+	class="reaction-box"
+	id="reactions-{{achievement_id}}">
+	<div class="dropdown-menu">
+		{% for r in reactions %}
+		<button
+			class="reaction-select {% if r.selected %}active-reaction{% endif %}"
+			hx-post="/achievement/{{ achievement_id }}/reactions"
+			hx-vals='{"reaction_type": "{{ r.value }}"}'
+			hx-target="#reactions-{{achievement_id}}"
+			hx-swap="outerHTML">
+			<span>{{ r.value }}</span>
+			<span class="count">{{ r.count }}</span>
+		</button>
+		{% endfor %}
+	</div>
+</div>

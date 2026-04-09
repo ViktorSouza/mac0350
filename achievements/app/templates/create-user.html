@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<form hx-post="/user">
+	<div class="form">
+		<h1>Bem-vindo!</h1>
+		<input
+			type="email"
+			name="email"
+			placeholder="lenobrega@gmail.com"
+			required />
+		<input
+			type="text"
+			name="username"
+			placeholder="Leno Brega"
+			required />
+		<input
+			type="password"
+			name="password"
+			placeholder="*********"
+			required />
+		<span>Esqueci minha senha.</span>
+
+		<div style="display: flex; gap: 5px">
+			<a
+				class="secondary-button"
+				href="/login"
+				style="flex: 1">
+				Entrar
+			</a>
+			<input
+				type="submit"
+				class="primary-button"
+				value="Criar conta"
+				style="flex: 1" />
+		</div>
+	</div>
+</form>
+{% endblock %}

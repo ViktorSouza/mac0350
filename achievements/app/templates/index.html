@@ -1,29 +1,38 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-%}
-<h2>Welcome</h2>
-<p>This is the home page.</p>
+%} {% if user %}
 <form
+	class="achievement"
 	hx-post="/achievements"
 	hx-target="#achievement-list"
 	hx-swap="beforeend">
+	<h2>Postar conquista</h2>
 	<input
 		type="text"
 		name="title"
-		placeholder="Title"
+		placeholder="Título"
 		required />
-	<input
+	<textarea
 		type="text"
 		name="description"
-		placeholder="Description"
-		required />
+		placeholder="Descrição"
+		required>
+	</textarea>
 
-	<button type="submit">Create</button>
+	<button type="submit">Postar</button>
 </form>
+{% endif %}
 <ul id="achievement-list">
-	{% for achievement in achievements %}
-	{% include "partials/achievement_card.html" with context %}
-	</li>
-
-	{% endfor %}
+    {% if achievements %}
+        {% for achievement in achievements %}
+            {% include "partials/achievement_card.html" with context %}
+        {% endfor %}
+    {% else %}
+        <li>Nenhuma conquista ainda :(</li>
+    {% endif %}
 </ul>
+<div
+	id="global-overlay"
+	class="overlay hidden" onclick="this.classList.add('hidden'); document.querySelectorAll('.popup').forEach(p => p.classList.add('hidden'));">
+</div>
+</div>
 {% endblock %}

@@ -1,0 +1,14 @@
+<p>Likes: {{ likes }}</p>
+
+<button hx-post="/curtir"
+        hx-target="#likes"
+        hx-swap="innerHTML">
+    Curtir!
+</button>
+
+<button hx-post="/reset"
+        hx-target="#likes"
+        hx-swap="innerHTML"
+        hx-confirm="Tem certeza que deseja apagar todas as curtidas?">
+    Resetar
+</button>

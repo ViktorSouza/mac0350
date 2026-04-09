@@ -1,0 +1,39 @@
+<div class="comments">
+	<h2>Comentários</h2>
+
+	<div class="comments-list">
+		{% for comment in achievement.comments %}
+		<div class="comment">
+			<div class="comment-header">
+				<strong>{{ comment.user.username }}</strong>
+				<span class="comment-date">
+					{{ comment.created_at.strftime("%d/%m/%Y %H:%M") }}
+				</span>
+			</div>
+
+			<div class="comment-body">{{ comment.content }}</div>
+		</div>
+		{% else %}
+		<div class="no-comments">Sem comentários ainda.</div>
+		{% endfor %}
+	</div>
+
+	<div class="comment-form">
+		<form
+			hx-post="/achievements/{{ achievement.id }}/comments"
+			hx-target="closest .comments"
+			hx-swap="outerHTML">
+			<textarea
+				name="content"
+				placeholder="Escreva um comentário..."
+				required>
+			</textarea>
+
+			<button
+				type="submit"
+				class="btn">
+				Comentar
+			</button>
+		</form>
+	</div>
+</div>

@@ -1,12 +1,87 @@
 <li class="achievement">
-	<div class="achievement-info">
-		<h2>{{ achievement.title }}</h2>
-		<p>{{ achievement.description }}</p>
-	</div>
+	<div class="achievement-card">
+		<div class="achievement-header">
+			<div class="achievement-user">
+				<strong>{{ achievement.user.username }}</strong>
+				•
+				<span class="achievement-date">
+					{{ achievement.created_at.strftime("%d/%m/%Y %H:%M") }}
+				</span>
+			</div>
+		</div>
 
-	<div class="achievement-options">
-		<button>Curtir</button>
-		<button>Comentar</button>
-		<button>Compartilhar</button>
+		<div class="achievement-body">
+			<h2 class="achievement-title">
+				<a href="/achievements/{{achievement.id}}">{{ achievement.title }}</a>
+			</h2>
+			<p class="achievement-description">{{ achievement.description }}</p>
+		</div>
+
+		<div class="achievement-actions">
+			<div
+				class="reaction-box"
+				hx-get="/achievement/{{ achievement.id }}/reactions/select"
+				hx-trigger="load"
+				hx-swap="outerHTML"></div>
+
+			<div class="action-buttons">
+				<button
+					class="secondary-button"
+					hx-on:click="
+						     document.querySelector('#comment').classList.toggle('hidden');
+						     document.querySelector('#popup-{{ achievement.id }}').classList.toggle('hidden');
+						     ">
+					<i class="fa-solid fa-comment"></i> Comentar
+				</button>
+
+				<div
+					id="popup-{{ achievement.id }}"
+					class="popup hidden comments-popup-wrapper">
+					<button
+						hx-on:click="
+							     document.querySelector('#comment').classList.add('hidden');
+							     document.querySelector('#popup-{{ achievement.id }}').classList.add('hidden');
+							     ">
+						X
+					</button>
+					<div class="comments">
+						<div class="comment-form">
+							<form
+								hx-post="/achievements/{{ achievement.id }}/comments"
+								hx-on::after-request="
+        document.querySelector('#comment').classList.add('hidden');
+        document.querySelector('#popup-{{ achievement.id }}').classList.add('hidden');
+    if (event.detail.successful) {
+        alert('Comentário criado com sucesso!');
+    } else {
+        alert('Erro: ' + event.detail.xhr.responseText);
+    }
+    ">
+								<textarea
+									name="content"
+									placeholder="Escreva um comentário..."
+									required></textarea>
+
+								<button
+									type="submit"
+									class="btn">
+									Comentar
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<button
+					class="secondary-button"
+					onclick="
+						navigator.clipboard
+							.writeText(window.location + 'achievements/{{ achievement.id }}')
+							.then(() => alert('Link copiado com sucesso!'))
+					">
+					<i class="fa-solid fa-share"></i> Compartilhar
+				</button>
+			</div>
+		</div>
 	</div>
 </li>

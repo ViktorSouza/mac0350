@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<div>
+	<div class="achievement-card">
+		<div class="achievement-header">
+			<div class="achievement-user">
+				<strong>{{ achievement.user.username }}</strong>
+				•
+				<span class="achievement-date">
+					{{ achievement.created_at.strftime("%d/%m/%Y %H:%M") }}
+				</span>
+			</div>
+		</div>
+
+		<div class="achievement-body">
+			<h2 class="achievement-title">
+				<a href="/achievements/{{ achievement.id }}">
+					{{ achievement.title }}
+				</a>
+			</h2>
+			<p class="achievement-description">{{ achievement.description }}</p>
+		</div>
+
+		<div class="achievement-actions">
+			<div
+				hx-get="/achievement/{{ achievement.id }}/reactions/select"
+				class="reactions"
+				hx-trigger="load"
+				hx-swap="outerHTML"></div>
+
+			<div class="action-buttons">
+				<button class="btn">Comentar</button>
+				<button class="btn">Compartilhar</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Aqui entra o partial -->
+	{% include "partials/comment_list.html" %}
+</div>
+{% endblock %}

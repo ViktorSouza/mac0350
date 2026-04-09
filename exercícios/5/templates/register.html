@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro</title>
+</head>
+<body>
+    <h1>Criar Usuário</h1>
+
+    <input id="nome" placeholder="Nome">
+    <input id="senha" placeholder="Senha">
+    <input id="bio" placeholder="Bio">
+
+    <button onclick="criar()">Criar</button>
+
+    <script>
+        async function criar() {
+            const res = await fetch("/users", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nome: document.getElementById("nome").value,
+                    senha: document.getElementById("senha").value,
+                    bio: document.getElementById("bio").value
+                })
+            });
+
+            if (res.ok) alert("Criado!");
+        }
+    </script>
+
+    <a href="/login">Ir para login</a>
+</body>
+</html>
